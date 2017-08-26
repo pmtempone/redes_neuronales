@@ -37,3 +37,19 @@ Todas emiten una única salida.
 
 + En el medio que generan la salida: No existe una receta para este problema.
 
+## Aprendizaje
+
++ No es necesario tener definido el proceso.
+
++ Dependen la manera en que lo resuelven en base a la arquitectura.
+
++ Concepto de generalización: toleracia al ruido.
+
+## En minería de datos
+
++ Descripción: derivar descripciones concisas
+
++ Predicción
+
++ Segmentación: Clustering
+

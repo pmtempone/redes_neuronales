@@ -14,7 +14,7 @@ Los W son valores reales, se necesitan un valor inicial.
 
 + El /alpha representa el learning rate w' = w + /alpha x
 
-![] (/fig/perceptron_1.png)
+![](fig/perceptron_1.png)
 
 + /alpha entre 0 y 1 por lo general.
 

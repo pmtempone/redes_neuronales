@@ -30,3 +30,4 @@ No se usa porque tienen que ser linealmente separables.
 
 Para saber el valor de /theta usado se despeja la ecuación, se transforma en w3 * 1, y esa w3 pasa a ser b quedando como -b.
 
+**Recomendación**: Escalara las variables

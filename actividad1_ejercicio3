@@ -1,0 +1,37 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Sep  2 15:18:41 2017
+
+@author: pablotempone
+"""
+
+import pandas as pd
+
+
+
+radar = pd.read_excel('/Users/pablotempone/Google Drive/Maestria/Redes Neuronales/radar.xlsx')
+
+P = np.array(radar)
+
+P = P[:,:2].T
+
+T = np.array(radar)
+
+T = T[:,2].T
+
+salida = train(P,T,0.01,1000,True)
+
+salida1 = train(P,T,0.01,1000,True)
+
+salida2 = train(P,T,0.01,1000,True) #bias alto genero que la recta quede inclinada hacia otro lado.
+
+salida3 = train(P,T,0.01,1000,True)
+
+
+desconocidos = pd.read_excel('/Users/pablotempone/Google Drive/Maestria/Redes Neuronales/radar.xlsx',sheet=2)
+
+
+
+
+

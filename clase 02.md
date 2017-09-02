@@ -12,7 +12,7 @@ Los W son valores reales, se necesitan un valor inicial.
 
 + Proceso iterativo
 
-+ El /alpha representa el learning rate  ![Learning rate](fig/perceptron.png)w' = w + /alpha x
++ El /alpha representa el learning rate  ![Learning rate](fig/perceptron.png)
 
 + /alpha entre 0 y 1 por lo general.
 
@@ -21,3 +21,7 @@ Los W son valores reales, se necesitan un valor inicial.
 ## Hoy
 
 No se usa porque tienen que ser linealmente separables.
+
+## bias
+
+Para saber el valor de /theta usado se despeja la ecuación, se transforma en w3 * 1, y esa w3 pasa a ser b quedando como -b.

@@ -12,7 +12,9 @@ Los W son valores reales, se necesitan un valor inicial.
 
 + Proceso iterativo
 
-+ El /alpha representa el learning rate  ![Learning rate](fig/perceptron.png)
++ El /alpha representa el learning rate w' = w + /alpha x
+
+![] (fig/perceptron_1.png?raw=true)
 
 + /alpha entre 0 y 1 por lo general.
 

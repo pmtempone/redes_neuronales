@@ -20,6 +20,8 @@ Los W son valores reales, se necesitan un valor inicial.
 
 + w_nuevo = w + /alpha * (t-y) * x
 
+![](<a href="https://www.codecogs.com/eqnedit.php?latex=w'&space;=&space;w&space;&plus;&space;\alpha&space;*&space;(t-y)&space;*&space;x" target="_blank"><img src="https://latex.codecogs.com/gif.latex?w'&space;=&space;w&space;&plus;&space;\alpha&space;*&space;(t-y)&space;*&space;x" title="w' = w + \alpha * (t-y) * x" /></a>)
+
 ## Hoy
 
 No se usa porque tienen que ser linealmente separables.

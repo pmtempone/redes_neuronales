@@ -13,13 +13,18 @@ Intenta minimizar el error cuadrático.
 + Elijo valores aleatoreos.
 + La expresión es derivable.
 
-
-```latex
-\documentclass[a4paper, 11pt]{article}
-
-\begin{document}
 Minimo en w_0 = -1, w_1 = 2
-\end{document}
-```
 
-Alpha es la velocidad de aprendizaje.
+**Alpha** es la velocidad de aprendizaje.
+
+**Siempre escalar las variables**
+
+### Para clasificar dos variables
+
+Se agrega una nueva dimensión separando mis datos.
+
+## Funciones más usadas
+
++ Purelin: fx lineal
++ Logsis: Sigmoide acotada entre 0 y 1, con derivada ya establecida.
++ Tansig: Sigmoide acotada entre -1 y 1, la derivada es en función de la propia función. Se usa para actualizar los w.

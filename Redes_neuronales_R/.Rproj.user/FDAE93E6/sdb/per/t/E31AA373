@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1504375480973.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "E31AA373",
+    "lastKnownWriteTime" : 0,
+    "last_content_update" : 1504375480973,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "4B5BB71C",
+        "caption" : "conjunto",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=conjunto&cache_key=4B5BB71C",
+        "displayedObservations" : "11",
+        "environment" : "",
+        "object" : "conjunto",
+        "preview" : "0",
+        "totalObservations" : "11",
+        "variables" : "3"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

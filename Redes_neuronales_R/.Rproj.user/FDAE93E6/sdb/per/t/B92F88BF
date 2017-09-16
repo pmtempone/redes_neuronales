@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(ggplot2)\n\nClase_A = t(as.matrix(data.frame(c(1, 3) , c(1.5, 4), c(2, 3), c(1.5, 2.5), c(2.5, 3))))\n\nClase_B = t(as.matrix(data.frame(c(2.5, 4) , c(2.5, 2), c(3, 3), c(3, 2.5), c(1.5, 5), c(2, 4.5))))\n  \nClase_A <- cbind(Clase_A,Clase='A')\nClase_B <- cbind(Clase_B,Clase='B')\n\nconjunto <- rbind.data.frame(Clase_A,Clase_B)\n\nconjunto$V1 <- as.numeric(as.character(conjunto$V1))\nconjunto$V2 <- as.numeric(as.character(conjunto$V2))\n\nggplot(conjunto,aes(x=V1,y=V2,col=Clase))+geom_point()+geom_abline(intercept = -2.5, slope = 2)+geom_abline(intercept = 6,slope = -0.9,colour='green')\n\n\nwrite.table(conjunto,\"salida_multiperceptron.csv\",row.names = FALSE,sep = \";\",dec = \",\")\n",
+    "created" : 1504371689765.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1037487763",
+    "id" : "B92F88BF",
+    "lastKnownWriteTime" : 1504380476,
+    "last_content_update" : 1504380476708,
+    "path" : "/Volumes/Disco_SD/redes_neuronales/Redes_neuronales_R/Actividad1_ejercicio2.R",
+    "project_path" : "Actividad1_ejercicio2.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

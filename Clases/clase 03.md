@@ -13,4 +13,13 @@ Intenta minimizar el error cuadrático.
 + Elijo valores aleatoreos.
 + La expresión es derivable.
 
-Minimo en w_0 =1-, w_1 = 2
+
+```latex
+\documentclass[a4paper, 11pt]{article}
+
+\begin{document}
+Minimo en w_0 = -1, w_1 = 2
+\end{document}
+```
+
+Alpha es la velocidad de aprendizaje.

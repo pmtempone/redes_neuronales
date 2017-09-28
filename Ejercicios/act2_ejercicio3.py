@@ -2,12 +2,15 @@ import matplotlib.pyplot as plt
 from scipy.io import wavfile as wf
 from Ejercicios.adaline import train
 
+
+
 import numpy as np
-%matplotlib inline
+#%%
+
 samplerate, audioOriginal = wf.read('/Users/pablotempone/Google Drive/Maestria/Redes Neuronales/Ejercicio2/entrevista.wav')
 
 plt.figure();
-plt.plot(audiooriginal)
+plt.plot(audioOriginal)
 
 max_col=np.max(audioOriginal, axis=0)
 min_col=np.min(audioOriginal, axis=0)
@@ -17,7 +20,7 @@ audioOriginalEscalado = (audioOriginal - min_col) / dif_col
 
 #%%
 
-r=0.7
+r=0.3
 numRamdom = np.random.uniform(0,1, size=len(audioOriginalEscalado))  - 0.5
 audioRuidoEscalado = audioOriginalEscalado +numRamdom *r
 
@@ -51,7 +54,7 @@ target_t_TRAIN = target_t [0:muestras]
 tuplaAudio = train (rwRuidoEscalado_t_TRAIN, target_t_TRAIN, alpha, MAXITERATIONS, cota_error, funcionSalida,True)
 
 #%%
-a = tuplaAudio[0] * rwRuidoEscalado_t_TRAIN
+a = tuplaAudio[0].T * rwRuidoEscalado_t_TRAIN
 #%%
 tuplaAudio[1].shape
 
@@ -59,4 +62,10 @@ tuplaAudio[1].shape
 audioReconstruido = np.dot(tuplaAudio[0],rwRuidoEscalado_t)+ tuplaAudio[1]
 
 
+#%%
+audio_final = (audioReconstruido.T * dif_col) + min_col
+
+wf.write('entrevista3.wav', samplerate, np.int16(audioReconstruido.T))
+
+wf.write('entrevista3.wav', samplerate, np.int16(audio_final))
 

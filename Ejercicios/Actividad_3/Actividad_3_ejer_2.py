@@ -81,3 +81,19 @@ T_matriz = np.concatenate(([T==0], [T==1]), axis=0).astype(int)
 (w_O, b_O, w_S, b_S, ite, errorProm) = bpn.train(P,T_matriz, T,5, 0.3, 0.2, 'logsig', 'logsig', 1500, 0.005, False)
 
 bpn.plot(P, T, w_O, b_O, 'Iteración: ' + str(ite) + ' - Error promedio: ' + str(errorProm))
+
+#punto c, triple de neuronas
+
+#Imagen 5
+
+np.random.shuffle(figura5)
+figura5_scale = (figura5[:,:2]-figura5[:,:2].min(axis=0))/(figura5[:,:2].max(axis=0)-figura5[:,:2].min(axis=0))
+
+P = figura5_scale[:,:2].T
+T = figura5[:,2]
+
+T_matriz = np.concatenate(([T==0], [T==1]), axis=0).astype(int)
+
+(w_O, b_O, w_S, b_S, ite, errorProm) = bpn.train(P,T_matriz, T,5*3, 0.3, 0.2, 'logsig', 'logsig', 1500, 0.005, False)
+
+bpn.plot(P, T, w_O, b_O, 'Iteración: ' + str(ite) + ' - Error promedio: ' + str(errorProm))

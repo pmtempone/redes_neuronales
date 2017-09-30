@@ -7,6 +7,8 @@ Created on Tue Aug 22 15:28:31 2017
 
 import numpy as np
 import scipy as sp
+import PIL
+import scipy.misc
 
 
 def AbrirImagen(archivo):

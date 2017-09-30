@@ -31,3 +31,12 @@ El gradiente ayuda a descender para alcanzar el valor mínimo.
 
 Todo esto es para la matriz de pesos de la capa de salida.
 
+## TIPS
+
++ Datos escalados
++ Desordenarlos para evitar sesgos.
++ Se tienen tantos bias como neuronas ocultas que se tengan.
++ Cada neurona de la capa de salida también tiene su bias.
++ No es bueno tener muchas neuronas porque tiende a overfittear.
++ Siempre hay que ver el azar de los w para no llegar a un mínimo local.
++ No hay receta de cuantas neuronas necesitas.

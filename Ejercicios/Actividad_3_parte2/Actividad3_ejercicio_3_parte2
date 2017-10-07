@@ -1,0 +1,178 @@
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+import Ejercicios.Actividad_3_parte2.bpn as bpn
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import mean_squared_error
+from math import sqrt
+import matplotlib.pyplot as plt
+
+
+#############
+#Ejercicio 3#
+#############
+
+drugs = pd.read_excel('/Volumes/Disco_SD/redes_neuronales/Ejercicios/Actividad_3/Drug4.xlsx',header=None)
+
+drugs_np = np.array(drugs)
+
+np.random.shuffle(drugs_np)
+
+drugs_np_scale = (drugs_np[:,:6]-drugs_np[:,:6].min(axis=0))/(drugs_np[:,:6].max(axis=0)-drugs_np[:,:6].min(axis=0))
+
+
+
+P = drugs_np_scale[:,:6]
+T = drugs_np[:,6]
+
+X_train, X_test, y_train, y_test = train_test_split(
+    P, T, test_size=0.33, random_state=42)
+X_train = X_train.T
+X_test = X_test.T
+
+#con dos salidas
+
+T_matriz_train = np.concatenate(([y_train/2], [y_train % 2]), axis=0).astype(int)
+
+
+(w_O, b_O, w_S, b_S, ite, errorProm) = bpn.train(X_train,T_matriz_train, y_train, 5, 0.1, 0.05, 'logsig', 'tansig', 1000, 0.001, True)
+
+def neta_pred(X_test,w_O,b_O,w_S,b_S,salidas):
+    neta_oculta = np.dot(X_test.T, w_O.T) + b_O.T
+    salida_oculta = 1 / (1 + np.exp(-neta_oculta))
+    neta_salida = w_S.dot(salida_oculta.T) + b_S
+    salida_salida = np.tanh(neta_salida)
+
+    def func(x):
+        if x > 0.8:
+            return 1
+        else:
+            return 0
+
+    from numpy import vectorize
+
+    vfunc = vectorize(func)
+
+    y = vfunc(salida_salida)
+
+    return np.array([salidas, 1]).dot(y)
+
+predict = neta_pred(X_test,w_O,b_O,w_S,b_S,2)
+
+confusion_matrix(y_test,predict)
+
+accuracy_score(y_test,predict,normalize=False)
+
+
+#con 4 salidas
+
+T_matriz_train = np.concatenate(([y_train==0], [y_train==1],[y_train==2], [y_train==3]), axis=0).astype(int)
+
+
+(w_O, b_O, w_S, b_S, ite, errorProm) = bpn.train(X_train,T_matriz_train, y_train, 5, 0.1, 0.05, 'logsig', 'tansig', 2000, 0.001, True)
+
+def neta_pred_4(X_test,w_O,b_O,w_S,b_S):
+    neta_oculta = np.dot(X_test.T, w_O.T) + b_O.T
+    salida_oculta = 1 / (1 + np.exp(-neta_oculta))
+    neta_salida = w_S.dot(salida_oculta.T) + b_S
+    salida_salida = np.tanh(neta_salida)
+
+    return np.argmax(salida_salida,axis=0)
+
+
+predict_4 = neta_pred_4(X_test,w_O,b_O,w_S,b_S)
+
+confusion_matrix(y_test,predict_4)
+
+accuracy_score(y_test,predict_4,normalize=False)
+
+
+#############
+#Ejercicio 4#
+#############
+
+Quimil = pd.read_excel('/Volumes/Disco_SD/redes_neuronales/Ejercicios/Actividad_3_parte2/Quimil.xlsx',sheetname=0)
+Quimil = Quimil.iloc[:,1:10]
+Quimil_test = pd.read_excel('/Volumes/Disco_SD/redes_neuronales/Ejercicios/Actividad_3_parte2/Quimil.xlsx',sheetname=1)
+Quimil_test = Quimil_test.iloc[:,1:10]
+
+quimil_np = np.array(Quimil)
+
+np.random.shuffle(quimil_np)
+
+quimil_np_scale = (quimil_np[:,:8]-quimil_np[:,:8].min(axis=0))/(quimil_np[:,:8].max(axis=0)-quimil_np[:,:8].min(axis=0))
+
+P = quimil_np_scale.T
+T = quimil_np[:,8]
+
+T_matriz_train = T[np.newaxis]
+
+(w_O, b_O, w_S, b_S, ite, errorProm) = bpn.train(P,T_matriz_train, T, 10, 0.1, 0.05, 'logsig', 'purelin', 5000, 0.01, False)
+
+(w_O2, b_O2, w_S2, b_S2, ite2, errorProm2) = bpn.train(P,T_matriz_train, T, 10, 0.1, 0.01, 'logsig', 'purelin', 5000, 0.01, False)
+
+#prediccion train
+
+def neta_pred_reg(P,w_O,b_O,w_S,b_S):
+    neta_oculta = np.dot(P.T, w_O.T) + b_O.T
+    salida_oculta = 1 / (1 + np.exp(-neta_oculta))
+    neta_salida = w_S.dot(salida_oculta.T) + b_S
+
+    return neta_salida
+
+quimil_np = np.array(Quimil)
+
+
+quimil_np_scale = (quimil_np[:,:8]-quimil_np[:,:8].min(axis=0))/(quimil_np[:,:8].max(axis=0)-quimil_np[:,:8].min(axis=0))
+
+P = quimil_np_scale.T
+
+predict_reg = neta_pred_reg(P,w_O,b_O,w_S,b_S)
+
+rms = sqrt(mean_squared_error(T[np.newaxis], predict_reg))
+rms
+
+quimil_b = Quimil.iloc[:,[8]]
+quimil_b['pred'] = predict_reg[0]
+
+quimil_b['dif'] = quimil_b.iloc[:,0] - quimil_b['pred']
+
+punto_b =  quimil_b.sort_values('dif')
+
+plt.scatter(T[np.newaxis],predict_reg)
+
+
+#prediccion pred
+
+quimil_test = np.array(Quimil_test)
+
+quimil_test_np_scale = (quimil_test-quimil_np[:,:8].min(axis=0))/(quimil_np[:,:8].max(axis=0)-quimil_np[:,:8].min(axis=0))
+
+Q = quimil_test_np_scale.T
+
+predict_test = neta_pred_reg(Q,w_O,b_O,w_S,b_S)
+
+predict_test
+
+#entrenar contra train, 3 opciones
+
+
+(w_O, b_O, w_S, b_S, ite, errorProm) = bpn.train(P,T_matriz_train, T, 1, 0.1, 0.05, 'logsig', 'purelin', 5000, 1, False)
+
+predict_reg = neta_pred_reg(P,w_O,b_O,w_S,b_S)
+
+plt.scatter(T[np.newaxis],predict_reg)
+
+(w_O, b_O, w_S, b_S, ite, errorProm) = bpn.train(P,T_matriz_train, T, 2, 0.1, 0.05, 'logsig', 'purelin', 5000, 1, False)
+
+predict_reg = neta_pred_reg(P,w_O,b_O,w_S,b_S)
+
+plt.scatter(T[np.newaxis],predict_reg)
+
+
+(w_O, b_O, w_S, b_S, ite, errorProm) = bpn.train(P,T_matriz_train, T, 3, 0.1, 0.05, 'logsig', 'purelin', 5000, 1, False)
+
+predict_reg = neta_pred_reg(P,w_O,b_O,w_S,b_S)
+
+plt.scatter(T[np.newaxis],predict_reg)

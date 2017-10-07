@@ -78,7 +78,7 @@ T = figura5[:,2]
 
 T_matriz = np.concatenate(([T==0], [T==1]), axis=0).astype(int)
 
-(w_O, b_O, w_S, b_S, ite, errorProm) = bpn.train(P,T_matriz, T,5, 0.3, 0.2, 'logsig', 'logsig', 1500, 0.005, False)
+(w_O, b_O, w_S, b_S, ite, errorProm) = bpn.train(P,T_matriz, T,5, 0.3, 0.2, 'logsig', 'logsig', 1500, 0.005, True)
 
 bpn.plot(P, T, w_O, b_O, 'Iteración: ' + str(ite) + ' - Error promedio: ' + str(errorProm))
 

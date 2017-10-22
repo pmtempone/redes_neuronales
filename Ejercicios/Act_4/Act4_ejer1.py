@@ -6,7 +6,7 @@ Created on Sat Sep 30 11:40:21 2017
 
 @author: pablotempone
 
-Title: Actividad 3 - Ejercicio 2
+Title: Actividad 4 - Ejercicio 1
 """
 
 import numpy as np
@@ -14,6 +14,8 @@ import Ejercicios.Actividad_3.ImagenPuntos as ip
 import PIL
 from scipy import misc
 import func.cpn as cpn
+import pandas as pd
+from sklearn.metrics import confusion_matrix
 
 figura1 = ip.AbrirImagen('/Volumes/Disco_SD/redes_neuronales/Ejercicios/Act_4/Figura 1.bmp')
 figura2 = ip.AbrirImagen('/Volumes/Disco_SD/redes_neuronales/Ejercicios/Act_4/Figura 2.bmp')
@@ -45,10 +47,10 @@ print(CantPatrones)
 ganadoraPred = np.array([])
 w_SPred = np.array([])
 
-distanciasPred = -np.sqrt(np.sum((w_O - (T_matriz[:, 200][np.newaxis]) * np.ones((ocultas, 1))) ** 2, 1))
+distanciasPred = -np.sqrt(np.sum((w_O - (T_matriz[:, 100][np.newaxis]) * np.ones((ocultas, 1))) ** 2, 1))
 ganadora = np.argmax(distanciasPred)
 
-w_S[:,ganadora]>0.8
+np.sum(w_S[:,ganadora]>0.8)
 
 
 
@@ -63,10 +65,24 @@ for p in range(CantPatrones):
     w_S[:, ganadora] = w_S[:, ganadora] + 0.05 * (T_matriz[:, p] - w_S[:, ganadora])
     T3[p] = ganadora
 
-w_S[:,T3]
-matriz_pred = np.matrix
+w_S[:,1.0]
+w_S[:,T3[1].astype(int)]
+matriz_pred = np.array([]).reshape(0,salidas)
 for i in range(CantPatrones):
-    matriz_pred[:,i] = w_S[i,ganadoraPred]
+    matriz_pred = np.vstack([matriz_pred,w_S[:,T3[i].astype(int)]])
+
+pred = pd.DataFrame(matriz_pred)
+
+resultados = pd.DataFrame(data=None,columns=('negro','rojo'))
+
+resultados['negro'] = np.where(pred[0]>=0.8,1,0)
+resultados['rojo'] = np.where(pred[1]>=0.8,1,0)
+
+confusion_matrix(T_matriz.T[:,0],resultados['negro'])
+
+def pred_red(T_matriz,):
+
+
 
 # %%
 
@@ -93,10 +109,20 @@ T = figura2[:,2]
 
 T_matriz = np.concatenate(([T==0], [T==1],[T==2]), axis=0).astype(int)
 
-(w_O, w_S) = cpn.train(P,T_matriz, T, 4, 0.09, 0.03, 0.02, 100, 100, True)
+(w_O, w_S) = cpn.train(P,T_matriz, T, 7, 0.09, 0.03, 0.02, 100, 100, True)
 
 (salidas, CantPatrones) = T_matriz.shape
-ocultas = 4
+ocultas = 7
+
+T3 = T
+
+for p in range(CantPatrones):
+    distanciasPred = -np.sqrt(np.sum((w_O - (T_matriz[:, p][np.newaxis]) * np.ones((ocultas, 1))) ** 2, 1))
+    ganadora = np.argmax(distanciasPred)
+
+    w_S[:, ganadora] = w_S[:, ganadora] + 0.05 * (T_matriz[:, p] - w_S[:, ganadora])
+    T3[p] = ganadora
+
 ganadoraPred = np.array([])
 w_SPred = np.array([])
 

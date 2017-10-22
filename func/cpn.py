@@ -103,7 +103,7 @@ def train(P, T, T2, ocultas, alfa, beta, gamma, max_ite_O, max_ite_S, dibujar):
             plot(P, T2, w_O, 'Iteración: ' + str(ite))
         
     ite = 0;
-    T3 = T2
+    T3 = T2.copy()
     while ( ite <= max_ite_S ):
         for p in range(CantPatrones): 
             distancias = -np.sqrt(np.sum((w_O-(P[:,p][np.newaxis])*np.ones((ocultas,1)))**2,1))

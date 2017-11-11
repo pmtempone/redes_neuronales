@@ -80,8 +80,18 @@ resultados['rojo'] = np.where(pred[1]>=0.8,1,0)
 
 confusion_matrix(T_matriz.T[:,0],resultados['negro'])
 
-def pred_red(T_matriz,):
+def pred_red(T_matriz,T,ocultas,w_O,w_S):
+    T3 = T
+    (salidas, CantPatrones) = T_matriz.shape
+    for p in range(CantPatrones):
+        distanciasPred = -np.sqrt(np.sum((w_O - (T_matriz[:, p][np.newaxis]) * np.ones((ocultas, 1))) ** 2, 1))
+        ganadora = np.argmax(distanciasPred)
 
+        w_S[:, ganadora] = w_S[:, ganadora] + 0.05 * (T_matriz[:, p] - w_S[:, ganadora])
+        T3[p] = ganadora
+    matriz_pred = np.array([]).reshape(0, salidas)
+    for i in range(CantPatrones):
+        matriz_pred = np.vstack([matriz_pred, w_S[:, T3[i].astype(int)]])
 
 
 # %%

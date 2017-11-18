@@ -23,6 +23,6 @@ T = drugs_np[:,6]
 T_matriz = np.concatenate(([T==0], [T==1], [T==2], [T==3]), axis=0).astype(int)
 
 
-(w_O, b_O, w_S, b_S, ite, errorProm) = bpn.train_w_fijos(P,T_matriz, T, 3 , 0.1, 0.05, 'logsig', 'tansig', 1000, 0.001, True,2)
+(w_O, b_O, w_S, b_S, ite, errorProm) = bpn.train_w_fijos(P,T_matriz, T, 3 , 0.5, 0.5, 'logsig', 'logsig', 1000, 0.001, True,-20.0)
 
 

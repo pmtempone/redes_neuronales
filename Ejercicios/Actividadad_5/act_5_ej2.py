@@ -35,3 +35,6 @@ elitismo = True
 
 (individuo, fitness) = evolucionar(longitud_cromosoma, tamaño_poblacion, probabilidad_crossover,probabilidad_mutacion, cantidad_generaciones, elitismo,genotipo2fenotipo, evaluarFitness, graficar)
 
+individuo
+
+fitness

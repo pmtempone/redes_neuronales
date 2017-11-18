@@ -163,7 +163,7 @@ T = figura4[:,2]
 
 T_matriz = np.concatenate(([T==0], [T==1],[T==2], [T==3]), axis=0).astype(int)
 
-(w_O, w_S) = cpn.train(P,T_matriz, T, 5, 0.09, 0.03, 0.02, 100, 100, True)
+(w_O, w_S) = cpn.train(P,T_matriz, T, 8, 0.09, 0.03, 0.02, 100, 100, True)
 
 #Imagen 5
 
@@ -175,4 +175,4 @@ T = figura5[:,2]
 
 T_matriz = np.concatenate(([T==0], [T==1]), axis=0).astype(int)
 
-(w_O, w_S) = cpn.train(P,T_matriz, T, 5, 0.09, 0.03, 0.02, 100, 100, True)
+(w_O, w_S) = cpn.train(P,T_matriz, T, 8, 0.09, 0.03, 0.02, 100, 100, True)
